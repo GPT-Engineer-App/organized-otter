@@ -1,10 +1,26 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState } from "react";
+import AddTaskInput from "../components/AddTaskInput";
+import TaskList from "../components/TaskList";
 
 const Index = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const handleAddTask = (taskTitle) => {
+    const newTask = {
+      id: tasks.length + 1,
+      title: taskTitle,
+      dueDate: "No due date",
+      priority: "Low",
+      description: "",
+    };
+    setTasks([...tasks, newTask]);
+  };
+
   return (
-    <div className="text-center">
-      <h1 className="text-3xl">Your Blank Canvas</h1>
-      <p>Chat with the agent to start making edits.</p>
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Inbox</h1>
+      <AddTaskInput onAddTask={handleAddTask} />
+      <TaskList tasks={tasks} />
     </div>
   );
 };
